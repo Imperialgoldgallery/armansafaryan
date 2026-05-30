@@ -1,569 +1,666 @@
+```html
 <!DOCTYPE html>
 <html lang="hy">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Դոկտ. Արման Սաֆարյան - Դիմածնոտային վիրաբույժ և Ստոմատոլոգ">
-    <title>Դոկտ. Արման Սաֆարյան | Դիմածնոտային վիրաբույժ</title>
-    
-    <!-- Google Fonts for Armenian Support -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <title>Դոկտոր Արման Սաֆարյան | Դիմածնոտային Վիրաբուժ</title>
     <style>
+        /* CSS Variables for Luxury Palette */
         :root {
-            --primary: #0056b3;
-            --primary-dark: #003d82;
-            --accent: #20c997;
-            --bg-light: #f8f9fa;
-            --bg-white: #ffffff;
-            --text-dark: #212529;
-            --text-muted: #6c757d;
-            --border: #dee2e6;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --radius: 8px;
-            --transition: all 0.3s ease;
+            --primary: #0f172a; /* Deep Slate/Navy */
+            --secondary: #1e293b;
+            --accent: #c5a059; /* Muted Gold */
+            --text-light: #f8fafc;
+            --text-dark: #334155;
+            --bg-light: #ffffff;
+            --bg-off: #f1f5f9;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Reset and Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
-            font-family: 'Noto Sans Armenian', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
+            font-family: var(--font-body);
             color: var(--text-dark);
             background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--primary); font-weight: 700; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        /* Utility Classes */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 100px 0; }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+        .subtitle {
+            text-align: center;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
         }
 
         /* Navigation */
-        header {
-            background: var(--bg-white);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-light); font-weight: 700; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; }
         .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: var(--transition);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
         }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--accent);
             transition: var(--transition);
         }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary);
-        }
+        .nav-links a:hover::after { width: 100%; }
+        .mobile-toggle { display: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
-            padding: 4rem 2rem;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-light);
         }
-
-        .hero-container {
-            max-width: 1100px;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .hero-img {
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 350px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 6px solid var(--bg-white);
-            box-shadow: var(--shadow);
-            aspect-ratio: 1/1;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            z-index: 1;
         }
-
-        .hero-content h1 {
-            font-size: 2.8rem;
-            color: var(--primary-dark);
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: radial-gradient(var(--accent) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+            z-index: 2;
+            mask-image: linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0));
+            -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 20%, rgba(0,0,0,0));
         }
-
-        .hero-content h2 {
-            font-size: 1.4rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            font-weight: 600;
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
         }
-
-        .hero-content p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-        }
-
+        .hero-text { flex: 1; padding-right: 2rem; }
+        .hero-text .greeting { color: var(--accent); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 0.5rem; display: block; }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-text p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem; max-width: 600px; }
         .btn {
             display: inline-block;
-            padding: 0.8rem 1.8rem;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: var(--radius);
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            margin-left: 0.8rem;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Sections */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            color: var(--primary-dark);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
+            padding: 1rem 2.5rem;
             background: var(--accent);
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            transition: var(--transition);
         }
+        .btn:hover { background: transparent; color: var(--accent); }
+        .btn-outline { background: transparent; color: var(--accent); margin-left: 1rem; }
+        .btn-outline:hover { background: var(--accent); color: var(--primary); }
 
-        /* Timeline */
-        .timeline {
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
             position: relative;
-            padding-left: 2rem;
-            border-left: 3px solid var(--border);
-            margin-left: 1rem;
         }
-
-        .timeline-item {
-            margin-bottom: 2rem;
+        .image-frame {
+            width: 400px;
+            height: 500px;
+            background: var(--secondary);
+            border-radius: 200px 200px 20px 20px;
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent);
         }
-
-        .timeline-item::before {
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-frame::before {
             content: '';
             position: absolute;
-            left: -2.4rem;
-            top: 0.5rem;
-            width: 16px;
-            height: 16px;
-            background: var(--primary);
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent);
+            z-index: -1;
+            transform: rotate(-5deg);
+            border-radius: inherit;
+        }
+
+        /* About Section */
+        .about { background: var(--bg-off); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-text h3 { font-size: 2rem; margin-bottom: 1.5rem; }
+        .personal-details { margin-top: 2rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .detail-item { background: var(--bg-light); padding: 1rem; border-left: 3px solid var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .detail-label { font-size: 0.8rem; color: #64748b; display: block; margin-bottom: 0.25rem; text-transform: uppercase; }
+        .detail-value { font-weight: 600; color: var(--primary); }
+
+        /* Experience & Education */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-light);
+            border: 4px solid var(--accent);
+            top: 15px;
             border-radius: 50%;
-            border: 3px solid var(--bg-white);
-            box-shadow: 0 0 0 3px var(--primary);
+            z-index: 1;
         }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--bg-light);
+        }
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--bg-light) transparent transparent;
+        }
+        .right::after { left: -10px; }
+        .content {
+            padding: 2rem;
+            background-color: var(--bg-light);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-top: 3px solid var(--accent);
+        }
+        .date { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
+        .content h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .content p { font-size: 0.95rem; color: #475569; }
 
-        .timeline-date {
+        /* Skills & Languages */
+        .skills { background: var(--primary); color: var(--text-light); }
+        .skills .section-title { color: var(--text-light); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .skill-category h3 { color: var(--accent); margin-bottom: 1.5rem; font-family: var(--font-body); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 2px; }
+        .skill-item { margin-bottom: 1.5rem; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 500; }
+        .progress-bar { width: 100%; background: #334155; height: 8px; border-radius: 4px; overflow: hidden; }
+        .progress { height: 100%; background: var(--accent); border-radius: 4px; transition: width 1s ease-in-out; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
             font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 0.3rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
         }
 
-        .timeline-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-desc {
-            color: var(--text-muted);
-        }
-
-        /* Cards Grid */
-        .cards-grid {
+        /* Contact Section */
+        .contact { background: var(--bg-off); }
+        .contact-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: var(--bg-light);
+            padding: 4rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
         }
-
-        .card {
-            background: var(--bg-white);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
+        .contact-info h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .contact-item { display: flex; align-items: center; margin-bottom: 1.5rem; }
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-off);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--accent);
+            font-size: 1.2rem;
         }
-
-        .card ul {
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-        }
-
-        .card ul li {
-            margin-bottom: 0.4rem;
-        }
-
-        /* Contact */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .contact-item {
-            background: var(--bg-white);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .contact-item h3 {
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .contact-item a {
-            color: var(--text-dark);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contact-item a:hover {
-            color: var(--primary);
-        }
+        .contact-text span { display: block; font-size: 0.8rem; color: #64748b; text-transform: uppercase; }
+        .contact-text p { font-weight: 600; color: var(--primary); }
 
         /* Footer */
-        footer {
-            background: var(--primary-dark);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        footer p {
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
+        footer { background: var(--primary); color: var(--text-light); padding: 2rem 0; text-align: center; border-top: 1px solid #334155; }
+        footer p { font-size: 0.9rem; color: #94a3b8; }
+        footer span { color: var(--accent); }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--bg-white);
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: var(--shadow);
-                gap: 1rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-img {
-                margin: 0 auto;
-                max-width: 280px;
-            }
-
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 0.5rem;
-            }
+        @media screen and (max-width: 992px) {
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 3rem; }
+            .hero-text { padding-right: 0; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 21px; }
+            .left::before, .right::before { left: 60px; border: medium solid white; border-width: 10px 10px 10px 0; border-color: transparent var(--bg-light) transparent transparent; }
+            .right { left: 0%; }
+        }
+        @media screen and (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .contact-container { grid-template-columns: 1fr; padding: 2rem; }
+            .image-frame { width: 100%; max-width: 350px; height: 400px; }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navigation -->
-    <header>
-        <nav>
-            <a href="#" class="logo">Դոկտ. Ա. Սաֆարյան</a>
-            <button class="menu-toggle" aria-label="Բացել մենյուն">☰</button>
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">ԱՐՄԱՆ <span>Ս.</span></a>
             <ul class="nav-links">
-                <li><a href="#home">Գլխավոր</a></li>
-                <li><a href="#about">Իմ մասին</a></li>
-                <li><a href="#education">Կրթություն</a></li>
+                <li><a href="#about">Իմ Մասին</a></li>
                 <li><a href="#experience">Փորձ</a></li>
+                <li><a href="#education">Կրթություն</a></li>
                 <li><a href="#skills">Հմտություններ</a></li>
                 <li><a href="#contact">Կապ</a></li>
             </ul>
-        </nav>
-    </header>
+            <div class="mobile-toggle">☰</div>
+        </div>
+    </nav>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <img src="IMG_5052.jpeg" alt="Դոկտ. Արման Սաֆարյան" class="hero-img">
-            <div class="hero-content">
-                <h1>Արման Սաֆարյան</h1>
-                <h2>Դիմածնոտային վիրաբույժ | Ստոմատոլոգ</h2>
-                <p>Բժշկական գիտությունների նվիրված մասնագետ՝ շտապ օգնության, դիմածնոտային վիրաբուժության և կլինիկական պրակտիկայի բազմամյա փորձով։</p>
-                <div>
-                    <a href="#contact" class="btn">Կապ հաստատել</a>
-                    <a href="mailto:safaryan0598@mail.ru" class="btn btn-outline">Գրել էլ. փոստով</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="greeting">Բարի Գալուստ</span>
+                <h1>Դոկտոր Արման <br><span style="color: var(--accent);">Սաֆարյան</span></h1>
+                <p>Դիմածնոտային Վիրաբույժ | Ստոմատոլոգ | Շտապ օգնության ավագ բժիշկ</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn">Կապվել</a>
+                    <a href="#about" class="btn btn-outline">Կենսագրություն</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-frame">
+                    <!-- Using the filename provided by user -->
+                    <img src="IMG_5052.jpeg" alt="Դոկտոր Արման Սաֆարյան">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About -->
-    <section id="about">
-        <h2 class="section-title">Իմ մասին</h2>
-        <div class="card">
-            <p>Ծնվել եմ 05.05.1998թ. Գեղարքունիքի մարզի Սարուխան գյուղում։ 2022թ.-ին ավարտել եմ Երևանի Մ. Հերացու անվան պետական բժշկական համալսարանի «Ստոմատոլոգիա» ֆակուլտետը, իսկ 2025թ.-ին՝ կլինիկական օրդինատուրայի «Դիմածնոտային վիրաբուժություն» բաժինը։ Ունեմ շտապ օգնության ղեկավարման, COVID-19 տրիաժի և կլինիկական վիրաբուժության փորձ։</p>
-            <br>
-            <p><strong>Անձնական որակներ.</strong> Խմբում աշխատելու կարողություն, պատասխանատվության զգացում, վերլուծական մտածողություն, արագ կողմնորոշվելու ունակություն, ժամանակի արդյունավետ կառավարում, համբերատարություն և հաղորդակցման բարձր հմտություններ։</p>
-        </div>
-    </section>
-
-    <!-- Education -->
-    <section id="education">
-        <h2 class="section-title">Կրթություն</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">2022 – 2025 թթ.</div>
-                <div class="timeline-title">Կլինիկական օրդինատուրա | «Դիմածնոտային վիրաբուժություն»</div>
-                <div class="timeline-desc">Երևանի Մ. Հերացու անվան պետական բժշկական համալսարան</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">10.07.2025 – 30.09.2025</div>
-                <div class="timeline-title">Վերապատրաստում</div>
-                <div class="timeline-desc">«Սուրբ Աստվածամայր» բժշկական կենտրոնի մանկական դիմածնոտային վիրաբուժության բաժին</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2015 – 2022 թթ.</div>
-                <div class="timeline-title">«Ստոմատոլոգիա» ֆակուլտետ | Բժիշկ-ստոմատոլոգ</div>
-                <div class="timeline-desc">Երևանի Մ. Հերացու անվան պետական բժշկական համալսարան</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2012 – 2015 թթ.</div>
-                <div class="timeline-title">«Ատամնատեխնիկական գործ» | Ատամնատեխնիկ</div>
-                <div class="timeline-desc">Երևանի պետական հենակետային բժշկական քոլեջ</div>
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">Անձնական տվյալներ</h2>
+            <div class="subtitle">Կենսագրություն</div>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>Մասնագիտական ուղի</h3>
+                    <p>Բարձրակարգ մասնագետ՝ դիմածնոտային վիրաբուժության և ստոմատոլոգիայի բնագավառում։ Ունեմ շտապ բժշկական օգնության կազմակերպման և կառավարման հարուստ փորձ։ Նվիրված եմ պացիենտների առողջությանը և բժշկական ստանդարտների բարձր պահպանմանը։</p>
+                    <p style="margin-top: 1rem;">Կլինիկական օրդինատուրայի ավարտումից հետո ստացել եմ վերապատրաստում մանկական դիմածնոտային վիրաբուժության բնագավառում։</p>
+                </div>
+                <div class="personal-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Ծննդյան թիվ</span>
+                        <span class="detail-value">05.05.1998թ.</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Ծննդավայր</span>
+                        <span class="detail-value">գ. Սարուխան, Գեղարքունիք</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Հասցե</span>
+                        <span class="detail-value">ք. Երևան, Մուրացան 113/1</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Ընտանեկան կարգավիճակ</span>
+                        <span class="detail-value">Չամուսնացած</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience -->
-    <section id="experience">
-        <h2 class="section-title">Աշխատանքային փորձ</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">10.01.2026 – մինչ այժմ</div>
-                <div class="timeline-title">Շտապ օգնության ավագ բժիշկ</div>
-                <div class="timeline-desc">Գեղարքունիքի մարզի շտապ օգնության ծառայություն</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">01.01.2025 – 09.01.2026</div>
-                <div class="timeline-title">Շտապ օգնության ղեկավար</div>
-                <div class="timeline-desc">Գավառի շտապ օգնության կայան</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">07.02.2024 – 30.11.2024</div>
-                <div class="timeline-title">Բժշկի օգնական (ԼՕՌ, դիմածնոտային և պլաստիկ վիրաբուժություն)</div>
-                <div class="timeline-desc">«ԼՕՌԷՍԹ» կլինիկա</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2020 – 2022 թթ.</div>
-                <div class="timeline-title">Բուժակ</div>
-                <div class="timeline-desc">Շտապ օգնություն և «Մեդլայն» բժշկական կենտրոն (COVID-19 նմուշառում և Տրիաժ)</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">01.12.2016 – 23.07.2018</div>
-                <div class="timeline-title">Բուժակ</div>
-                <div class="timeline-desc">Զինվորական գումարտակ</div>
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Աշխատանքային Փորձ</h2>
+            <div class="subtitle">Կարիերայի ընթացք</div>
+
+            <div class="timeline">
+                <!-- Current -->
+                <div class="timeline-item left">
+                    <div class="content">
+                        <span class="date">10.01.2026 - Այժմ</span>
+                        <h3>Շտապ օգնության ավագ բժիշկ</h3>
+                        <p>Գեղարքունիքի մարզ</p>
+                    </div>
+                </div>
+                <!-- Previous 1 -->
+                <div class="timeline-item right">
+                    <div class="content">
+                        <span class="date">01.01.2025 - 09.01.2026</span>
+                        <h3>Շտապ օգնության ղեկավար</h3>
+                        <p>ք. Գավառ</p>
+                    </div>
+                </div>
+                <!-- Previous 2 -->
+                <div class="timeline-item left">
+                    <div class="content">
+                        <span class="date">10.07.2025 - 30.09.2025</span>
+                        <h3>Վերապատրաստում</h3>
+                        <p>«Սուրբ Աստվածամայր» ԲԿ, մանկական դիմածնոտային վիրաբուժություն</p>
+                    </div>
+                </div>
+                <!-- Previous 3 -->
+                <div class="timeline-item right">
+                    <div class="content">
+                        <span class="date">07.02.2024 - 30.11.2024</span>
+                        <h3>Բժշկի օգնական</h3>
+                        <p>«ԼՕՌԷՍԹ» կլինիկա (ԼՕՌ, դիմածնոտային և պլաստիկ վիրաբուժություն)</p>
+                    </div>
+                </div>
+                <!-- Previous 4 -->
+                <div class="timeline-item left">
+                    <div class="content">
+                        <span class="date">2020 - 2022</span>
+                        <h3>Բուժակ & Նմուշառում</h3>
+                        <p>Շտապ օգնություն և «Մեդլայն» ԲԿ (COVID-19 տրիաժ)</p>
+                    </div>
+                </div>
+                 <!-- Military -->
+                 <div class="timeline-item right">
+                    <div class="content">
+                        <span class="date">2016 - 2018</span>
+                        <h3>Զինծառայող-Բուժակ</h3>
+                        <p>Զինվորական գումարտակ</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills -->
-    <section id="skills">
-        <h2 class="section-title">Հմտություններ և Ունակություններ</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <h3>🌐 Լեզուներ</h3>
-                <ul>
-                    <li><strong>Հայերեն</strong> – գերազանց (մայրենի), C2</li>
-                    <li><strong>Ռուսերեն</strong> – շատ լավ, B2</li>
-                    <li><strong>Անգլերեն</strong> – լավ, A2</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>💻 Համակարգչային հմտություններ</h3>
-                <ul>
-                    <li>Microsoft Office (Word, Excel, PowerPoint)</li>
-                    <li>Outlook Express</li>
-                    <li>Այլ գրասենյակային ծրագրեր</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>🤝 Փափուկ հմտություններ</h3>
-                <ul>
-                    <li>Խմբային աշխատանք և ղեկավարում</li>
-                    <li>Պատասխանատվություն և վերլուծական մտածողություն</li>
-                    <li>Արագ կողմնորոշում ճգնաժամային իրավիճակներում</li>
-                    <li>Ժամանակի կառավարում և հաղորդակցման հմտություններ</li>
-                </ul>
+    <!-- Education Section -->
+    <section id="education" class="section" style="background: var(--bg-off);">
+        <div class="container">
+            <h2 class="section-title">Կրթություն</h2>
+            <div class="subtitle">Ակադեմիական աստիճաններ</div>
+
+            <div class="skills-grid"> <!-- Reusing grid layout -->
+                <div class="skill-item" style="background: var(--bg-light); padding: 2rem; border-top: 4px solid var(--accent); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
+                    <span class="date">2022 - 2025</span>
+                    <h3 style="font-size: 1.2rem;">Կլինիկական Օրդինատուրա</h3>
+                    <p>ԵՊԲՀ «Դիմածնոտային վիրաբուժություն»</p>
+                </div>
+                <div class="skill-item" style="background: var(--bg-light); padding: 2rem; border-top: 4px solid var(--accent); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
+                    <span class="date">2015 - 2022</span>
+                    <h3 style="font-size: 1.2rem;">Ստոմատոլոգիա</h3>
+                    <p>ԵՊԲՀ Բժիշկ-ստոմատոլոգ</p>
+                </div>
+                <div class="skill-item" style="background: var(--bg-light); padding: 2rem; border-top: 4px solid var(--accent); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
+                    <span class="date">2012 - 2015</span>
+                    <h3 style="font-size: 1.2rem;">Ատամնատեխնիկական գործ</h3>
+                    <p>ԵՊՀԲՔ Ատամնատեխնիկ</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
-        <h2 class="section-title">Կապ</h2>
-        <div class="contact-grid">
-            <div class="contact-item">
-                <h3>📞 Հեռախոս</h3>
-                <a href="tel:+37477702898">+374 77 702898</a>
-            </div>
-            <div class="contact-item">
-                <h3>✉️ Էլ. փոստ</h3>
-                <a href="mailto:safaryan0598@mail.ru">safaryan0598@mail.ru</a>
-            </div>
-            <div class="contact-item">
-                <h3>📍 Հասցե</h3>
-                <p>ք. Երևան, Մուրացան 113/1</p>
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <h2 class="section-title">Հմտություններ</h2>
+            <div class="subtitle">Մասնագիտական որակներ</div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Լեզուներ</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Հայերեն</span>
+                            <span>C2</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Ռուսերեն</span>
+                            <span>B2</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Անգլերեն</span>
+                            <span>A2</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Անձնական որակներ</h3>
+                    <div class="tag-list">
+                        <div class="tag">Խմբում աշխատելու կարողություն</div>
+                        <div class="tag">Պատասխանատվություն</div>
+                        <div class="tag">Վերլուծական մտածողություն</div>
+                        <div class="tag">Արագ կողմնորոշում</div>
+                        <div class="tag">Ժամանակի կառավարում</div>
+                        <div class="tag">Համբերատարություն</div>
+                        <div class="tag">Հաղորդակցում</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Համակարգչային հմտություններ</h3>
+                    <div class="tag-list">
+                        <div class="tag">Microsoft Word</div>
+                        <div class="tag">Microsoft Excel</div>
+                        <div class="tag">PowerPoint</div>
+                        <div class="tag">Outlook Express</div>
+                        <div class="tag">Գրասենյակային ծրագրեր</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Կապ</h2>
+            <div class="subtitle">Կապ հաստատել</div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Կապվեք ինձ հետ</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <span>Հասցե</span>
+                            <p>ք. Երևան, Մուրացան 113/1</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <span>Հեռախոս</span>
+                            <p>+374 77 702898</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <span>Էլ. փոստ</span>
+                            <p>safaryan0598@mail.ru</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map" style="background: var(--bg-off); min-height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                   <p style="color: #94a3b8; font-weight: 500;">Քարտեզ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <p>© 2026 Դոկտ. Արման Սաֆարյան. Բոլոր իրավունքները պաշտպանված են։</p>
+        <div class="container">
+            <p>&copy; 2026 <span>Դոկտոր Արման Սաֆարյան</span>. Բոլոր իրավունքները պաշտպանված են։</p>
+        </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
+        // Mobile Navigation Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
         const navLinks = document.querySelector('.nav-links');
+        const mobileLinks = document.querySelectorAll('.nav-links a');
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        mobileToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.width = '100%';
+            navLinks.style.background = '#0f172a';
+            navLinks.style.padding = '2rem';
+            navLinks.style.textAlign = 'center';
         });
 
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                }
             });
         });
 
-        // Smooth scroll fallback for older browsers
+        // Smooth Scroll for Safari
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple Fade-in on Scroll
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
+        }, observerOptions);
+
+        document.querySelectorAll('.content, .timeline-item, .skill-item, .detail-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
         });
     </script>
 </body>
 </html>
+```
